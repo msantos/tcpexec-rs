@@ -28,10 +28,9 @@ usage: <IPADDR>:<PORT> <COMMAND> <...>
         std::process::exit(1);
     }
 
-    let argv: Vec<_> = args
+    let argv: Vec<_> = args[1..]
         .iter()
         .map(|arg| CString::new(arg.as_str()).unwrap())
-        .skip(1)
         .collect();
 
     let laddr = args[0].to_owned().parse()?;

@@ -15,17 +15,20 @@ const STDIN_FILENO: i32 = 0;
 const STDOUT_FILENO: i32 = 1;
 const SOMAXCONN: i32 = 128;
 
+fn usage() -> ! {
+    eprintln!(
+        r#"{} {}
+usage: <IPADDR>:<PORT> <COMMAND> <...>"#,
+        PROGNAME, VERSION,
+    );
+    std::process::exit(1);
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().skip(1).collect();
 
     if args.len() < 2 {
-        eprintln!(
-            r#"{} {}
-usage: <IPADDR>:<PORT> <COMMAND> <...>
-"#,
-            PROGNAME, VERSION,
-        );
-        std::process::exit(1);
+        usage()
     }
 
     let argv: Vec<_> = args[1..]

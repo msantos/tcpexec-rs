@@ -3,6 +3,7 @@ use std::ffi::CString;
 use std::fmt::Write;
 use std::net::{SocketAddr, TcpListener};
 use std::os::unix::io::IntoRawFd;
+use std::process::exit;
 
 use socket2::{Domain, Socket, Type};
 
@@ -21,7 +22,7 @@ fn usage() -> ! {
 usage: <IPADDR>:<PORT> <COMMAND> <...>"#,
         PROGNAME, VERSION,
     );
-    std::process::exit(1);
+    exit(1);
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

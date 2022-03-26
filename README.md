@@ -23,6 +23,10 @@ TCP socket:
 $ tcpexec [::1]:9090 env
 
 $ tcpexec [::]:9090 env
+
+$ tcpexec 127.0.0.1:9090 env
+
+$ tcpexec 0.0.0.0:9090 env
 ```
 
 ## Supervised using daemontools

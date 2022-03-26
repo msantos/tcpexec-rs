@@ -57,9 +57,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn socket(addr: SocketAddr) -> std::io::Result<Socket> {
-    let s = Socket::new_raw(Domain::IPV6, Type::STREAM, None)?;
+    let domain = if addr.is_ipv4() {
+        Domain::IPV4
+    } else {
+        Domain::IPV6
+    };
+    let s = Socket::new_raw(domain, Type::STREAM, None)?;
 
-    s.set_only_v6(false)?;
     s.set_reuse_address(true)?;
     s.set_reuse_port(true)?;
     s.bind(&addr.into())?;
